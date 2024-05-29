@@ -43,8 +43,8 @@ jobs:
           ELASTIC_KEY: ${{ secrets.ELASTIC_KEY }}
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: 
-        pip install requests
-        python development/elastic-api/update_rule.py
+          pip install requests
+          python development/elastic-api/update_rule.py
 
       
 
