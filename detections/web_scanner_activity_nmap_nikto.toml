@@ -7,14 +7,14 @@ from = "now-9m"
 #index = ["logs-endpoint.events.process*"]
 #language = "eql"
 #license = "Elastic License v2"
-name = "Web Scanner Activity - Nmap and Nikto via Git"
+name = "Web Scanner Activity - Nmap and Nikto (via Git)"
 ##
 #references = [
 #    "https://github.com/center-for-threat-informed-defense/adversary_emulation_library/blob/master/apt29/Archive/CALDERA_DIY/evals/payloads/stepSeventeen_email.ps1",
 #]
 ##
 risk_score = 25
-#rule_id = "1dee0500-4aeb-44ca-b24b-4a285d7b6ba1"
+rule_id = "5"
 severity = "low" 
 type = "query"
 

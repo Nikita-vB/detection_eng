@@ -5,13 +5,13 @@ from = "now-9m" # default, change as needed
 #index = ["logs-endpoint.events.process*"]
 language = "eql"
 #license = "Elastic License v2"
-name = "Template Rule via Git"
+name = "Template Rule (via Git)"
 note = "Note"
 #references = [
 #    "https://github.com/center-for-threat-informed-defense/adversary_emulation_library/blob/master/apt29/Archive/CALDERA_DIY/evals/payloads/stepSeventeen_email.ps1",
 #]
 risk_score = 47
-#rule_id = "1dee0500-4aeb-44ca-b24b-4a285d7b6ba1"
+rule_id = "3"
 severity = "medium"
 tags = [
     "Domain: Endpoint",
