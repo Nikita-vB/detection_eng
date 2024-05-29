@@ -29,7 +29,7 @@ for root, dirs, files in os.walk("detections/"): #set path -> folder for testing
 
                 #set required fields:
                 required_fields = []              
-                if alert['rule']['type'] == "query": # query based aler
+                if alert['rule']['type'] == "query": # query based alert
                     required_fields = ['author', 'description', 'name', 'rule_id', 'risk_score', 'type', 'severity', 'query', 'threat']
                 elif alert['rule']['type']== "eql": # event correlation alert
                     required_fields = ['author', 'description', 'name', 'rule_id', 'risk_score', 'type', 'severity', 'query', 'language', 'threat']
@@ -57,7 +57,7 @@ for root, dirs, files in os.walk("detections/"): #set path -> folder for testing
         
         #print(data)
         
-        elastic_data = requests.put(url, headers=headers, data=data).json()
+        elastic_data = requests.post(url, headers=headers, data=data).json()
 
         print(elastic_data)
         print("##########")
