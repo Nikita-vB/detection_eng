@@ -66,7 +66,7 @@ for root, dirs, files in os.walk("detections/"): #set path -> folder for testing
                 data += "  \"enabled\": true\n}"
         
         #print(data)
-            rule_id = [alert]["rule"]["rule_id"]
+            rule_id = alert["rule"]["rule_id"]
             url = url + "?rule_id=" + rule_id
 
             elastic_data = requests.put(url, headers=headers, data=data).json()
