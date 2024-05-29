@@ -8,7 +8,7 @@ import json
 # endpoint: detection_engine/rules
 url = "https://detectionengineeringclass101.kb.us-central1.gcp.cloud.es.io:9243/api/detection_engine/rules"
 
-api_key = "bWF2b3VJOEIwOWdZR2hTYVVaUGw6blc2SUtxdEdUWTJwN2NIcnRoNHZIZw=="
+api_key = os.environ['ELASTIC_KEY']
 headers = {
     'Content-Type': 'application/json;charset=UTF-8',
     'kbn-xsrf': 'true',
@@ -16,8 +16,8 @@ headers = {
 }
 
 # use custom_test_alerts
-#for root, dirs, files in os.walk("/home/nvb/Detection_Engineering2/custom_test_alerts/"): #set path
-for root, dirs, files in os.walk("/home/nvb/Detection_Engineering2/test_single_rule/"): #set path -> folder for testing single rule
+#for root, dirs, files in os.walk("detections"): #set path
+for root, dirs, files in os.walk("detections/"): #set path -> folder for testing single rule
     for file in files:
         print(file)
         #data = "{\n"

@@ -1,11 +1,12 @@
 import requests
+import os
 
 # url = <kibana host>:<port>/api/<endpoint>
 # kibana host: our demo instance url = https://detectionengineeringclass101.kb.us-central1.gcp.cloud.es.io:9243/
 # endpoint: detection_engine/rules
 url = "https://detectionengineeringclass101.kb.us-central1.gcp.cloud.es.io:9243/api/detection_engine/rules"
 
-api_key = "bWF2b3VJOEIwOWdZR2hTYVVaUGw6blc2SUtxdEdUWTJwN2NIcnRoNHZIZw=="
+api_key = os.environ['ELASTIC_KEY']
 headers = {
     'Content-Type': 'application/json;charset=UTF-8',
     'kbn-xsrf': 'true',
