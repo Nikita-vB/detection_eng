@@ -30,11 +30,11 @@ for root, dirs, files in os.walk("detections/"): #set path -> folder for testing
                 #set required fields:
                 required_fields = []              
                 if alert['rule']['type'] == "query": # query based alert
-                    required_fields = ['author', 'description', 'name', 'rule_id', 'risk_score', 'type', 'severity', 'query', 'threat']
+                    required_fields = ['author', 'description', 'name', 'risk_score', 'type', 'severity', 'query', 'threat']
                 elif alert['rule']['type']== "eql": # event correlation alert
-                    required_fields = ['author', 'description', 'name', 'rule_id', 'risk_score', 'type', 'severity', 'query', 'language', 'threat']
+                    required_fields = ['author', 'description', 'name', 'risk_score', 'type', 'severity', 'query', 'language', 'threat']
                 elif alert['rule']['type']== "threshold": # threshold based alert
-                    required_fields = ['author', 'description', 'name', 'rule_id', 'risk_score', 'type', 'severity', 'query', 'threshold', 'threat']
+                    required_fields = ['author', 'description', 'name', 'risk_score', 'type', 'severity', 'query', 'threshold', 'threat']
                 else:
                     print("Unsupported rule type found in: " + full_path)
                     break
