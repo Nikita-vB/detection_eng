@@ -1,6 +1,7 @@
 import requests
 import os
 import tomllib
+import sys
 
 #this script maps the alert to the MITRE ATT&CK matrix tactics & techniques
 
@@ -56,7 +57,7 @@ mitre_tactics_unique.sort()
 #Mapping of our alerts to MITRE standard:
 alert_data = {}
 
-for root, dirs, files in os.walk("/home/nvb/Detection_Engineering2/test_single_rule/"): #set path to folder with alerts
+for root, dirs, files in os.walk("detections/"): #set path to folder with alerts
     for file in files:
         if file.endswith(".toml"):
             full_path = os.path.join(root, file)
@@ -87,7 +88,7 @@ for root, dirs, files in os.walk("/home/nvb/Detection_Engineering2/test_single_r
 
 
 # Validate MITRE Mappings for each rule:
-zero_faults = True
+failure = 0
 for file in alert_data:
     for line in alert_data[file]:
         tactic = line['tactic'].lower()
@@ -99,7 +100,7 @@ for file in alert_data:
         # Check that MITRE Tactic exists
         if tactic not in mitre_tactics_unique:
             print("The MITRE Tactic supplied does not exist: " + "\"" + tactic + "\"" + " in " + file)
-            zero_faults = False
+            failure = 1
 
         # Check that MITRE Technique ID is valid
         try: 
@@ -107,7 +108,7 @@ for file in alert_data:
                 pass
         except KeyError:
             print("Invalid MITRE Technique ID: " + "\"" + technique_id + "\"" + " in " + file)
-            zero_faults = False
+            failure = 1
 
         # Check that MITRE T-ID matches Name
         try:
@@ -115,7 +116,7 @@ for file in alert_data:
             alert_name = line['technique_name']
             if mitre_name != alert_name:
                 print("MITRE Technique ID and Name mismatch in " + file + "\nEXPECTED: " + "\"" + mitre_name + "\"" + " GIVEN: " + "\"" + alert_name + "\"")
-                zero_faults = False
+                failure = 1
         except KeyError:
             pass
 
@@ -126,7 +127,7 @@ for file in alert_data:
                 alert_name = line['subtechnique_name']
                 if mitre_name != alert_name:
                     print("MITRE Sub-Technique ID and Name mismatch in " + file + "\nEXPECTED: " + "\"" + mitre_name + "\"" + " GIVEN: " + "\"" + alert_name + "\"")
-                    zero_faults = False
+                    failure = 1
         except KeyError:
             pass
 
@@ -134,9 +135,12 @@ for file in alert_data:
         try:
             if mitreMapped[technique_id]['deprecated'] == True:
                 print("Deprecated MITRE Technique ID: " + "\"" + technique_id + "\"" + " in " + file)
-                zero_faults = False
+                failure = 1
         except KeyError:
             pass
 
-if zero_faults:
-    print("MITRE ATT&CK Mappings: Correct")
+# if failure == 0:
+#     print("MITRE ATT&CK Mappings: Correct")
+
+if failure != 0:
+    sys.exit(1)

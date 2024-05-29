@@ -2,7 +2,9 @@ import tomllib
 import sys
 import os
 
-for root, dirs, files in os.walk("/home/nvb/Detection_Engineering2/test_single_rule/"): #set path
+failure = 0
+
+for root, dirs, files in os.walk("detections/"): #set path
     for file in files:
         if file.endswith(".toml"):
             full_path = os.path.join(root, file)
@@ -37,9 +39,9 @@ for root, dirs, files in os.walk("/home/nvb/Detection_Engineering2/test_single_r
 
                 if missing_fields:
                     print("Missing fields in " + file + ": " + str(missing_fields) + "\nAlert type: " + str(alert['rule']['type']))
+                    failure = 1
                 else: 
                     print("Validation passed for: " + file)
 
-
-
-
+if failure != 0:
+    sys.exit(1)
