@@ -5,7 +5,7 @@ from = "now-9m" # default, change as needed
 #index = ["logs-endpoint.events.process*"]
 language = "eql"
 #license = "Elastic License v2"
-name = "Excessive Web Traffic (scripted toml)"
+name = "Excessive Web Traffic via Git"
 #note = "Note"
 #references = [
 #    "https://github.com/center-for-threat-informed-defense/adversary_emulation_library/blob/master/apt29/Archive/CALDERA_DIY/evals/payloads/stepSeventeen_email.ps1",
