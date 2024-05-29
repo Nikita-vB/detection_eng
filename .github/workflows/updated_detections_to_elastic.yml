@@ -14,7 +14,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  all-detections-to-elastic:
+  updated-detections-to-elastic:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     env:
@@ -23,12 +23,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
+      - uses: actions/setup-python@v4
 
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v44
-
-      # NOTE: `since_last_remote_commit: true` is implied by default and falls back to the previous local commit.
+        #object = steps.changed-files.outputs.all_changed_files
 
       - name: List all changed files
         env:
@@ -38,8 +38,13 @@ jobs:
             echo "$file was changed"
           done
 
-      #- name: Toml To Json To API
-      #  run: python development/elastic-api/toml_to_json_to_api.py
+      - name: Run Updated Alert Script - to Elastic
+        env: 
+          ELASTIC_KEY: ${{ secrets.ELASTIC_KEY }}
+          CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: 
+        pip install requests
+        python development/elastic-api/update_rule.py
 
       
 
