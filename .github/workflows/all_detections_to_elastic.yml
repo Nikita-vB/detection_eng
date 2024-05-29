@@ -29,7 +29,7 @@ jobs:
         run: pip install requests
 
       - name: Toml To Json To API
-        run: python development/toml_to_json_to_api.py
+        run: python development/elastic-api/toml_to_json_to_api.py
 
       
 
