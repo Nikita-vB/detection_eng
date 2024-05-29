@@ -5,6 +5,8 @@ name: Updated Detections To Elastic
 # Controls when the workflow will run
 on:
   push:
+    branches:
+      - main
     path:
       '**.toml'
   # Only run this when you set up a new Elastic Version
