@@ -17,7 +17,7 @@ type = "threshold"
 query = 'event.dataset : "zeek.http"'
 
 # if threshold alert:
-[rule.threshold]
+[threshold]
 field = ["source.ip"]
 value = 1000
 
