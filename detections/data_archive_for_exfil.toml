@@ -11,7 +11,7 @@ name = "Data Archive for Exfil (via Git)"
 #    "https://github.com/center-for-threat-informed-defense/adversary_emulation_library/blob/master/apt29/Archive/CALDERA_DIY/evals/payloads/stepSeventeen_email.ps1",
 #]
 risk_score = 25
-rule_id = "2"
+rule_id = "00000000-0000-0000-0000-000000000002"
 severity = "medium"
 
 type = "query"
