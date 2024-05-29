@@ -1,0 +1,54 @@
+[rule]
+author = ["NVB"]
+description = "Insert Description"
+from = "now-9m" # default, change as needed
+#index = ["logs-endpoint.events.process*"]
+language = "eql"
+#license = "Elastic License v2"
+name = "Insert Name"
+note = "Note"
+#references = [
+#    "https://github.com/center-for-threat-informed-defense/adversary_emulation_library/blob/master/apt29/Archive/CALDERA_DIY/evals/payloads/stepSeventeen_email.ps1",
+#]
+risk_score = 47
+#rule_id = "1dee0500-4aeb-44ca-b24b-4a285d7b6ba1"
+severity = "medium"
+tags = [
+    "Domain: Endpoint",
+    "OS: Windows",
+    "Use Case: Threat Detection",
+    "Tactic: Collection",
+    "Data Source: Elastic Defend",
+]
+type = "eql"
+
+query = '''
+insert query
+'''
+
+
+[[rule.threat]] # Example Tactic, Technique, Sub-Technique
+framework = "MITRE ATT&CK"
+[[rule.threat.technique]]
+id = "T1114" #T id
+name = "Email Collection"
+reference = "https://attack.mitre.org/techniques/T1114/"
+# Subtechnique if present:
+#[[rule.threat.technique.subtechnique]]
+#id = "T1114.001"
+#name = "Local Email Collection"
+#reference = "https://attack.mitre.org/techniques/T1114/001/"
+
+[rule.threat.tactic]
+id = "TA0007" # TA id
+name = "Discovery"
+reference = "https://attack.mitre.org/tactics/TA0007/"
+
+# Optional Fields: 
+# throttle: 7d
+# version: 1
+# interval: 5m
+
+# [rule.threshold]
+# field = ["host.hostname"]
+# value = 100

@@ -1,0 +1,47 @@
+[rule]
+author = ["NVB"]
+description = "Using Zeek HTTP data, look for bat file extension on any destination port that is not port 80."
+from = "now-9m" # default, change as needed
+#index = ["logs-endpoint.events.process*"]
+language = "eql"
+#license = "Elastic License v2"
+name = "Bat files observed in HTTP traffic on Unusual Port (not 80) (scripted toml)"
+#note = "Note"
+#references = [
+#    "https://github.com/center-for-threat-informed-defense/adversary_emulation_library/blob/master/apt29/Archive/CALDERA_DIY/evals/payloads/stepSeventeen_email.ps1",
+#]
+risk_score = 25
+#rule_id = "1dee0500-4aeb-44ca-b24b-4a285d7b6ba1"
+severity = "low"
+
+type = "query"
+
+query = '''
+    event.dataset : zeek.http and  not destination.port : 80 and url.extension : bat
+'''
+
+[[rule.threat]] # Example Tactic, Technique, Sub-Technique
+framework = "MITRE ATT&CK"
+[[rule.threat.technique]]
+id = "T1059" #T id
+name = "Command and Scripting Interpreter"
+reference = "https://attack.mitre.org/techniques/T1059/"
+# Subtechnique if present:
+[[rule.threat.technique.subtechnique]]
+id = "T1059.003"
+name = "Windows Command Shell"
+reference = "https://attack.mitre.org/techniques/T1059/003/"
+
+[rule.threat.tactic]
+id = "TA0002" # TA id
+name = "Execution"
+reference = "https://attack.mitre.org/tactics/TA0002/"
+
+# Optional Fields: 
+# throttle: 7d
+# version: 1
+# interval: 5m
+
+# [rule.threshold]
+# field = ["host.hostname"]
+# value = 100

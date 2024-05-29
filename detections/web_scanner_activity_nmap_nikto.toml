@@ -1,0 +1,43 @@
+[rule]
+author = ["NVB"]
+description = """
+Detects Nmap and Nikto User Agent strings in zeek.http data
+"""
+from = "now-9m"
+#index = ["logs-endpoint.events.process*"]
+#language = "eql"
+#license = "Elastic License v2"
+name = "Web Scanner Activity - Nmap and Nikto (scripted toml)"
+##
+#references = [
+#    "https://github.com/center-for-threat-informed-defense/adversary_emulation_library/blob/master/apt29/Archive/CALDERA_DIY/evals/payloads/stepSeventeen_email.ps1",
+#]
+##
+risk_score = 25
+#rule_id = "1dee0500-4aeb-44ca-b24b-4a285d7b6ba1"
+severity = "low" 
+type = "query"
+
+query = '''
+event.dataset : zeek.http and user_agent.original: *Nmap* or user_agent.original: *Nikto*
+'''
+
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+[[rule.threat.technique]]
+id = "T1046" #T
+name = "Network Service Discovery"
+reference = "https://attack.mitre.org/techniques/T1046/"
+# Subtechnique if present:
+#[[rule.threat.technique.subtechnique]]
+#id = "T1114.001"
+#name = "Local Email Collection"
+#reference = "https://attack.mitre.org/techniques/T1114/001/"
+
+
+[rule.threat.tactic]
+id = "TA0007" # TA id
+name = "Discovery"
+reference = "https://attack.mitre.org/tactics/TA0007/"
+
